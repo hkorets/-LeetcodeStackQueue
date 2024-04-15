@@ -7,7 +7,6 @@ class Queue:
     def __init__(self):
         self.head = None
         self.tail = None
-        self.size = 0
 
     def enqueue(self, data):
         new_node = Node(data)
@@ -16,7 +15,6 @@ class Queue:
         else:
             self.tail.next = new_node
             self.tail = new_node
-        self.size += 1
 
     def dequeue(self):
         if self.is_empty():
@@ -25,11 +23,10 @@ class Queue:
         self.head = self.head.next
         if self.head is None:
             self.tail = None
-        self.size -= 1
         return removed_node.data
 
     def is_empty(self):
-        return self.size == 0
+        return self.head == None
 
     def peek(self):
         if self.is_empty():
@@ -43,7 +40,7 @@ class MyStack:
 
     def push(self, x: int) -> None:
         self.Q2.enqueue(x)
-        while self.Q1.size != 0:
+        while not self.Q1.is_empty():
             self.Q2.enqueue(self.Q1.dequeue())
         self.Q1, self.Q2 = self.Q2, self.Q1
 
